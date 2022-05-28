@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:14-alpine
+    container_name: db
+    restart: always
+    ports:
+      - 5430:5432
+    environment:
+      POSTGRES_USER: devalade
+      POSTGRES_PASSWORD: XmD@QCJCNaJ4Rv
+      POSTGRES_DB: ilewemi
