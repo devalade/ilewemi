@@ -8,6 +8,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AccessTokenGuard } from '@Modules/common/decorators/guards';
 import { ClassModule } from './class/class.module';
 import { AcademicYearModule } from './academic-year/academic-year.module';
+import { SubjectModule } from './subject/subject.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { AcademicYearModule } from './academic-year/academic-year.module';
     AuthModule,
     ClassModule,
     AcademicYearModule,
+    SubjectModule,
   ],
   providers: [
     {

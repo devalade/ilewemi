@@ -8,8 +8,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { CreateAcademicYearDto } from './dto/create-academic-year.dto';
-import { UpdateAcademicYearDto } from './dto/update-academic-year.dto';
+import { CreateAcademicYearDto, UpdateAcademicYearDto } from './dto';
 
 @Controller('academic-year')
 export class AcademicYearController {

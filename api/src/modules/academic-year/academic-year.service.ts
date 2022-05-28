@@ -20,19 +20,23 @@ export class AcademicYearService {
     return res;
   }
 
-  findAll() {
-    return `This action returns all academicYear`;
+  async findAll() {
+    const res = this.academicYearRepository.find();
+    return res;
   }
 
-  findOne(id: string) {
-    return `This action returns a #${id} academicYear`;
+  async findOne(id: string) {
+    const res = await this.academicYearRepository.findOne(id);
+    return res;
   }
 
-  update(id: string, data: UpdateAcademicYearDto) {
-    return `This action updates a #${id} academicYear`;
+  async update(id: string, data: UpdateAcademicYearDto) {
+    const res = await this.academicYearRepository.update(id, data);
+    return res;
   }
 
   remove(id: string) {
-    return `This action removes a #${id} academicYear`;
+    const res = this.academicYearRepository.delete(id);
+    return res;
   }
 }
