@@ -1,6 +1,6 @@
 import { Model } from '@src/modules/common/model.entity';
 import { UserEntity } from '@src/modules/user/entities/user.entity';
-import { Column, Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity('class')
 export class ClassEntity extends Model {
@@ -10,7 +10,7 @@ export class ClassEntity extends Model {
   @Column()
   group: string;
 
-  @Column({ name: 'created_by' })
-  @ManyToOne(() => UserEntity, (user) => user.id)
-  createdBy: string;
+  @ManyToOne(() => UserEntity)
+  @JoinColumn({ name: 'created_by' })
+  createdBy: UserEntity;
 }

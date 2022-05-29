@@ -9,6 +9,7 @@ import { AccessTokenGuard } from '@Modules/common/decorators/guards';
 import { ClassModule } from './class/class.module';
 import { AcademicYearModule } from './academic-year/academic-year.module';
 import { SubjectModule } from './subject/subject.module';
+import { TeachModule } from './teach/teach.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { SubjectModule } from './subject/subject.module';
     ClassModule,
     AcademicYearModule,
     SubjectModule,
+    TeachModule,
   ],
   providers: [
     {
