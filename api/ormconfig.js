@@ -1,6 +1,5 @@
-import dotenv from 'dotenv';
-
-dotenv.config();
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require('dotenv').config();
 
 const { DB_TYPE, DB_HOST, DB_USERNAME, DB_PASSWORD, DB_PORT, DB_DATABASE } =
   process.env;
@@ -11,7 +10,7 @@ module.exports = {
   port: DB_PORT,
   username: DB_USERNAME,
   password: DB_PASSWORD,
-  database: DB_NAME,
+  database: DB_DATABASE,
   migrations: [__dirname + '/src/migrations/*{.ts,.js}'],
   entities: [__dirname + '/src/**/*.entity.{ts,js}'],
 };
