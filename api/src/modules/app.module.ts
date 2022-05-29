@@ -10,6 +10,7 @@ import { ClassModule } from './class/class.module';
 import { AcademicYearModule } from './academic-year/academic-year.module';
 import { SubjectModule } from './subject/subject.module';
 import { TeachModule } from './teach/teach.module';
+import { StudentModule } from './student/student.module';
 
 @Module({
   imports: [
@@ -38,6 +39,7 @@ import { TeachModule } from './teach/teach.module';
     AcademicYearModule,
     SubjectModule,
     TeachModule,
+    StudentModule,
   ],
   providers: [
     {
