@@ -9,6 +9,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import {
+  CreateMarkDto,
   CreateParentToStudentDto,
   CreateStudentDto,
   UpdateStudentDto,
@@ -26,6 +27,21 @@ export class StudentController {
   @Post('parent')
   addParent(@Body() data: CreateParentToStudentDto) {
     return this.studentService.addParent(data);
+  }
+
+  @Post('mark')
+  addMark(@Body() data: CreateMarkDto) {
+    return this.studentService.addMark(data);
+  }
+
+  @Patch(':student_id/mark/:mark_id')
+  updateMark(
+    @Param('student_id') student_id: string,
+    @Param('mark_id') mark_id: string,
+
+    @Body() data: UpdateStudentDto,
+  ) {
+    return this.studentService.updateMark(student_id, mark_id, data);
   }
 
   @Get()
