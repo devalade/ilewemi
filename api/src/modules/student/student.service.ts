@@ -2,8 +2,10 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../user/entities/user.entity';
+import { CreateParentToStudentDto } from './dto';
 import { CreateStudentDto } from './dto/create-student.dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
+import { ParentToStudentEntity } from './entities/parent-to-student.entity';
 import { StudentEntity } from './entities/student.entity';
 
 @Injectable()
@@ -13,6 +15,8 @@ export class StudentService {
     private userRepository: Repository<UserEntity>,
     @InjectRepository(StudentEntity)
     private studentrepository: Repository<StudentEntity>,
+    @InjectRepository(ParentToStudentEntity)
+    private parentToStudentRepository: Repository<ParentToStudentEntity>,
   ) {}
   async create(data: CreateStudentDto) {
     const { createdBy, studentCode, lastName, firstName } = data;
@@ -24,6 +28,17 @@ export class StudentService {
       createdBy: user,
     });
 
+    return res;
+  }
+
+  async addParent(data: CreateParentToStudentDto) {
+    const { userId, studentId } = data;
+    const student = await this.userRepository.findOneOrFail(userId);
+    const user = await this.userRepository.findOneOrFail(studentId);
+    const res = await this.parentToStudentRepository.insert({
+      user,
+      student,
+    });
     return res;
   }
 

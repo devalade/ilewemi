@@ -11,6 +11,7 @@ import { AcademicYearModule } from './academic-year/academic-year.module';
 import { SubjectModule } from './subject/subject.module';
 import { TeachModule } from './teach/teach.module';
 import { StudentModule } from './student/student.module';
+import { ParentToStudentModule } from './parent-to-student/parent-to-student.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { StudentModule } from './student/student.module';
     SubjectModule,
     TeachModule,
     StudentModule,
+    ParentToStudentModule,
   ],
   providers: [
     {

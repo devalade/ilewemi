@@ -8,7 +8,11 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { CreateStudentDto, UpdateStudentDto } from './dto';
+import {
+  CreateParentToStudentDto,
+  CreateStudentDto,
+  UpdateStudentDto,
+} from './dto';
 
 @Controller('student')
 export class StudentController {
@@ -17,6 +21,11 @@ export class StudentController {
   @Post()
   create(@Body() data: CreateStudentDto) {
     return this.studentService.create(data);
+  }
+
+  @Post('parent')
+  addParent(@Body() data: CreateParentToStudentDto) {
+    return this.studentService.addParent(data);
   }
 
   @Get()
