@@ -10,6 +10,8 @@ import { ClassModule } from './class/class.module';
 import { AcademicYearModule } from './academic-year/academic-year.module';
 import { SubjectModule } from './subject/subject.module';
 import { TeachModule } from './teach/teach.module';
+import { StudentModule } from './student/student.module';
+import { ParentToStudentModule } from './parent-to-student/parent-to-student.module';
 
 @Module({
   imports: [
@@ -18,16 +20,18 @@ import { TeachModule } from './teach/teach.module';
       envFilePath: '.env',
     }),
     TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
       useFactory: (config: ConfigService) =>
         ({
-          type: 'postgres',
-          host: '0.0.0.0',
-          port: 5430,
-          username: 'devalade',
-          password: 'XmD@QCJCNaJ4Rv',
-          database: 'ilewemi',
+          type: config.get('DB_TYPE'),
+          host: config.get('DB_HOST'),
+          port: config.get('DB_PORT'),
+          username: config.get('DB_USERNAME'),
+          password: config.get('DB_PASSWORD'),
+          database: config.get('DB_DATABASE'),
           entities: [__dirname + './../**/**.entity{.ts,.js}'],
-          synchronize: true,
+          synchronize: config.get('DB_SYNC') === 'true',
         } as TypeOrmModuleAsyncOptions),
     }),
     UserModule,
@@ -36,6 +40,8 @@ import { TeachModule } from './teach/teach.module';
     AcademicYearModule,
     SubjectModule,
     TeachModule,
+    StudentModule,
+    ParentToStudentModule,
   ],
   providers: [
     {

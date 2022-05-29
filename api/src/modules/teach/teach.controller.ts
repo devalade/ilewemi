@@ -1,5 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { TeachService } from './teach.service';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CreateTeachDto } from './dto/create-teach.dto';
 import { UpdateTeachDto } from './dto/update-teach.dto';
 
@@ -8,8 +16,8 @@ export class TeachController {
   constructor(private readonly teachService: TeachService) {}
 
   @Post()
-  create(@Body() createTeachDto: CreateTeachDto) {
-    return this.teachService.create(createTeachDto);
+  create(@Body() data: CreateTeachDto) {
+    return this.teachService.create(data);
   }
 
   @Get()
@@ -19,16 +27,16 @@ export class TeachController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.teachService.findOne(+id);
+    return this.teachService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTeachDto: UpdateTeachDto) {
-    return this.teachService.update(+id, updateTeachDto);
+  update(@Param('id') id: string, @Body() data: UpdateTeachDto) {
+    return this.teachService.update(id, data);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.teachService.remove(+id);
+    return this.teachService.remove(id);
   }
 }

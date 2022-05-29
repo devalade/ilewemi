@@ -9,16 +9,16 @@ import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 export class TeachEntity extends Model {
   @ManyToOne(() => UserEntity)
   @JoinColumn({ name: 'user_id' })
-  userId: UserEntity;
+  user: UserEntity;
 
   @ManyToOne(() => ClassEntity)
   @JoinColumn({ name: 'class_id' })
-  classId: ClassEntity;
+  class: ClassEntity;
 
   @ManyToOne(() => SubjectEntity)
   @JoinColumn({ name: 'subject_id' })
-  subjectId: SubjectEntity;
+  subject: SubjectEntity;
 
-  @Column()
+  @Column('int')
   coef: number;
 }
