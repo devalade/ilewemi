@@ -1,6 +1,7 @@
-import { Entity, Column, BeforeInsert } from 'typeorm';
+import { Entity, Column, BeforeInsert, OneToMany, JoinColumn } from 'typeorm';
 import * as argon2 from 'argon2';
 import { Model } from '@Modules/common/model.entity';
+import { ClassEntity } from '@src/modules/class/entities/class.entity';
 
 export enum UserRole {
   PRINCIPAL = 'principal',
@@ -42,6 +43,10 @@ export class UserEntity extends Model {
 
   @Column({ unique: true, nullable: true, name: 'refresh_token_hash' })
   refreshTokenHash: string;
+
+  @OneToMany(() => ClassEntity, (user) => user.createdBy)
+  @JoinColumn({ name: 'class_id' })
+  class: ClassEntity[];
 
   async comparePassword(incomePassowrd: string) {
     return await argon2.verify(this.password, incomePassowrd);
