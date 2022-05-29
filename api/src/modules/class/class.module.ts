@@ -3,10 +3,9 @@ import { ClassService } from './class.service';
 import { ClassController } from './class.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClassEntity } from './entities/class.entity';
-import { UserEntity } from '../user/entities/user.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ClassEntity, UserEntity])],
+  imports: [TypeOrmModule.forFeature([ClassEntity])],
   controllers: [ClassController],
   providers: [ClassService],
 })

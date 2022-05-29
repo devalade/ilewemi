@@ -1,7 +1,6 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { UserEntity } from '../user/entities/user.entity';
 import { CreateSubjectDto, UpdateSubjectDto } from './dto';
 import { SubjectEntity } from './entities/subject.entity';
 
@@ -10,20 +9,12 @@ export class SubjectService {
   constructor(
     @InjectRepository(SubjectEntity)
     private subjectRepository: Repository<SubjectEntity>,
-    @InjectRepository(UserEntity)
-    private userRepository: Repository<UserEntity>,
   ) {}
 
   async create(data: CreateSubjectDto) {
-    try {
-      const { name, createdBy } = data;
-      const user = await this.userRepository.findOne(createdBy);
-      const res = this.subjectRepository.create({ name, createdBy: user });
-      await this.subjectRepository.save(res);
-      return res;
-    } catch (error) {
-      throw new ForbiddenException('Access Denied');
-    }
+    const res = this.subjectRepository.create(data as Partial<SubjectEntity>);
+    await this.subjectRepository.save(res);
+    return res;
   }
 
   async findAll() {
@@ -37,12 +28,7 @@ export class SubjectService {
   }
 
   async update(id: string, data: UpdateSubjectDto) {
-    const { name, createdBy } = data;
-    const user = await this.userRepository.findOne(createdBy);
-    const res = await this.subjectRepository.update(id, {
-      name,
-      createdBy: user,
-    });
+    const res = await this.subjectRepository.update(id, data);
     return res;
   }
 
