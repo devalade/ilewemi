@@ -11,7 +11,8 @@ import { AcademicYearModule } from './academic-year/academic-year.module';
 import { SubjectModule } from './subject/subject.module';
 import { TeachModule } from './teach/teach.module';
 import { StudentModule } from './student/student.module';
-import { ParentToStudentModule } from './parent-to-student/parent-to-student.module';
+import { AbsenceModule } from './absence/absence.module';
+import { SchoolFeesModule } from './school-fees/school-fees.module';
 
 @Module({
   imports: [
@@ -41,7 +42,8 @@ import { ParentToStudentModule } from './parent-to-student/parent-to-student.mod
     SubjectModule,
     TeachModule,
     StudentModule,
-    ParentToStudentModule,
+    AbsenceModule,
+    SchoolFeesModule,
   ],
   providers: [
     {

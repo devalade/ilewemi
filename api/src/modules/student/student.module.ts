@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentEntity } from './entities/student.entity';
 import { UserEntity } from '../user/entities/user.entity';
 import { ParentToStudentEntity } from './entities/parent-to-student.entity';
+import { MarkEntity } from './entities/mark.entity';
+import { TeachEntity } from '../teach/entities/teach.entity';
 
 @Module({
   imports: [
@@ -12,6 +14,8 @@ import { ParentToStudentEntity } from './entities/parent-to-student.entity';
       StudentEntity,
       UserEntity,
       ParentToStudentEntity,
+      MarkEntity,
+      TeachEntity,
     ]),
   ],
   controllers: [StudentController],

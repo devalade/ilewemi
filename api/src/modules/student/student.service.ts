@@ -1,12 +1,16 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { TeachEntity } from '../teach/entities/teach.entity';
 import { UserEntity } from '../user/entities/user.entity';
-import { CreateParentToStudentDto } from './dto';
-import { CreateStudentDto } from './dto/create-student.dto';
+import {
+  CreateStudentDto,
+  UpdateMarkDto,
+  CreateMarkDto,
+  CreateParentToStudentDto,
+} from './dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
-import { ParentToStudentEntity } from './entities/parent-to-student.entity';
-import { StudentEntity } from './entities/student.entity';
+import { StudentEntity, ParentToStudentEntity, MarkEntity } from './entities';
 
 @Injectable()
 export class StudentService {
@@ -17,6 +21,10 @@ export class StudentService {
     private studentrepository: Repository<StudentEntity>,
     @InjectRepository(ParentToStudentEntity)
     private parentToStudentRepository: Repository<ParentToStudentEntity>,
+    @InjectRepository(MarkEntity)
+    private markRepository: Repository<MarkEntity>,
+    @InjectRepository(TeachEntity)
+    private teachRepository: Repository<TeachEntity>,
   ) {}
   async create(data: CreateStudentDto) {
     const { createdBy, studentCode, lastName, firstName } = data;
@@ -40,6 +48,28 @@ export class StudentService {
       student,
     });
     return res;
+  }
+
+  async addMark(data: CreateMarkDto) {
+    const { studentId, teachId, typeOfExam, createdBy, obtainedMark } = data;
+    const student = await this.studentrepository.findOneOrFail(studentId);
+    const teach = await this.studentrepository.findOneOrFail(teachId);
+    const _createdBy = await this.userRepository.findOneOrFail(createdBy);
+    return await this.markRepository.insert({
+      student,
+      teach,
+      createdBy: _createdBy,
+      obtainedMark,
+      typeOfExam,
+    });
+  }
+
+  async updateMark(student_id: string, mark_id: string, data: UpdateMarkDto) {
+    const { typeOfExam, obtainedMark } = data;
+    return await this.markRepository.update(mark_id, {
+      obtainedMark,
+      typeOfExam,
+    });
   }
 
   async findAll() {
