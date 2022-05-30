@@ -12,6 +12,7 @@ import { SubjectModule } from './subject/subject.module';
 import { TeachModule } from './teach/teach.module';
 import { StudentModule } from './student/student.module';
 import { AbsenceModule } from './absence/absence.module';
+import { SchoolFeesModule } from './school-fees/school-fees.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { AbsenceModule } from './absence/absence.module';
     TeachModule,
     StudentModule,
     AbsenceModule,
+    SchoolFeesModule,
   ],
   providers: [
     {
