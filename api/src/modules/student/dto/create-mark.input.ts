@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsNumber, IsString } from 'class-validator';
-import { TypeOfExam, MarkEntity } from '@Modules/student/entities/mark.entity';
+import { TypeOfExam } from '@Modules/student/entities/mark.entity';
 
 export class CreateMarkDto {
   @ApiProperty()
@@ -8,7 +8,7 @@ export class CreateMarkDto {
   obtainedMark: number;
 
   @ApiProperty()
-  @IsEnum(MarkEntity)
+  @IsString()
   typeOfExam: TypeOfExam;
 
   @ApiProperty()
