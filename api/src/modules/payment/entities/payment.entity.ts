@@ -10,16 +10,15 @@ export enum PaymentMethod {
 
 @Entity('payment')
 export class PaymentEntity extends Model {
+  @Column()
+  ref: string;
+
   @Column('int')
   amount: number;
 
-  @ManyToOne(() => SchoolFeeEntity)
+  @ManyToOne(() => StudentEntity)
   @JoinColumn({ name: 'student_id' })
   student: StudentEntity;
-
-  @ManyToOne(() => SchoolFeeEntity)
-  @JoinColumn({ name: 'school_fees_id' })
-  schoolFee: SchoolFeeEntity;
 
   @Column({
     name: 'payment_method',
