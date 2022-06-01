@@ -4,7 +4,7 @@ import { StudentController } from './student.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { StudentEntity } from './entities/student.entity';
 import { UserEntity } from '../user/entities/user.entity';
-import { ParentToStudentEntity } from './entities/parent-to-student.entity';
+import { TutorEntity } from './entities/tutor.entity';
 import { MarkEntity } from './entities/mark.entity';
 import { TeachEntity } from '../teach/entities/teach.entity';
 
@@ -13,7 +13,7 @@ import { TeachEntity } from '../teach/entities/teach.entity';
     TypeOrmModule.forFeature([
       StudentEntity,
       UserEntity,
-      ParentToStudentEntity,
+      TutorEntity,
       MarkEntity,
       TeachEntity,
     ]),

@@ -4,7 +4,7 @@ import { UserEntity } from '@src/modules/user/entities/user.entity';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity('parent_to_student')
-export class ParentToStudentEntity extends Model {
+export class TutorEntity extends Model {
   @ManyToOne(() => StudentEntity)
   @JoinColumn({ name: 'student_id' })
   student: StudentEntity;

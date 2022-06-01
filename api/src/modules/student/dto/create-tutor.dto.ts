@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 
-export class CreateParentToStudentDto {
+export class CreateTutorDto {
   @ApiProperty()
   @IsString()
   studentId: string;

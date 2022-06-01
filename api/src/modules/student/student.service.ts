@@ -7,10 +7,10 @@ import {
   CreateStudentDto,
   UpdateMarkDto,
   CreateMarkDto,
-  CreateParentToStudentDto,
+  CreateTutorDto,
 } from './dto';
 import { UpdateStudentDto } from './dto/update-student.dto';
-import { StudentEntity, ParentToStudentEntity, MarkEntity } from './entities';
+import { StudentEntity, TutorEntity, MarkEntity } from './entities';
 
 @Injectable()
 export class StudentService {
@@ -19,31 +19,29 @@ export class StudentService {
     private userRepository: Repository<UserEntity>,
     @InjectRepository(StudentEntity)
     private studentrepository: Repository<StudentEntity>,
-    @InjectRepository(ParentToStudentEntity)
-    private parentToStudentRepository: Repository<ParentToStudentEntity>,
+    @InjectRepository(TutorEntity)
+    private tutorRepository: Repository<TutorEntity>,
     @InjectRepository(MarkEntity)
     private markRepository: Repository<MarkEntity>,
     @InjectRepository(TeachEntity)
     private teachRepository: Repository<TeachEntity>,
   ) {}
   async create(data: CreateStudentDto) {
-    const { createdBy, studentCode, lastName, firstName } = data;
-    const user = await this.userRepository.findOne(createdBy);
+    const { studentCode, lastName, firstName } = data;
     const res = await this.studentrepository.insert({
       studentCode,
       lastName,
       firstName,
-      createdBy: user,
     });
 
     return res;
   }
 
-  async addParent(data: CreateParentToStudentDto) {
+  async addParent(data: CreateTutorDto) {
     const { userId, studentId } = data;
     const student = await this.userRepository.findOneOrFail(userId);
     const user = await this.userRepository.findOneOrFail(studentId);
-    const res = await this.parentToStudentRepository.insert({
+    const res = await this.tutorRepository.insert({
       user,
       student,
     });

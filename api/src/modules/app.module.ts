@@ -16,6 +16,7 @@ import { SchoolFeesModule } from './school-fees/school-fees.module';
 import { PaymentModule } from './payment/payment.module';
 import { DocumentModule } from './document/document.module';
 import { ScheduleEventModule } from './schedule-event/schedule-event.module';
+import { AttendModule } from './attend/attend.module';
 
 @Module({
   imports: [
@@ -50,6 +51,7 @@ import { ScheduleEventModule } from './schedule-event/schedule-event.module';
     PaymentModule,
     DocumentModule,
     ScheduleEventModule,
+    AttendModule,
   ],
   providers: [
     {
