@@ -53,7 +53,7 @@ export class AttendService {
     });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} attend`;
+  async remove(id: string) {
+    return await this.attendRepository.delete(id);
   }
 }

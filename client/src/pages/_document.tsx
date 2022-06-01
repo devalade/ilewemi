@@ -1,8 +1,8 @@
-import Document from 'next/document';
+import Message from 'next/message';
 import { createGetInitialProps } from '@mantine/next';
 
 const getInitialProps = createGetInitialProps();
 
-export default class _Document extends Document {
+export default class _Message extends Message {
   static getInitialProps = getInitialProps;
 }

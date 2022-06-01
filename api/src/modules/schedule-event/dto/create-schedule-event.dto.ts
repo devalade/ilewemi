@@ -13,5 +13,5 @@ export class CreateScheduleEventDto {
 
   @ApiProperty()
   @IsString()
-  documentId: string;
+  messageId: string;
 }

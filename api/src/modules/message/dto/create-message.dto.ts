@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 
-export class CreateDocumentDto {
+export class CreateMessageDto {
   @ApiProperty()
   @IsString()
   title: string;
@@ -9,8 +9,4 @@ export class CreateDocumentDto {
   @ApiProperty()
   @IsString()
   content: string;
-
-  @ApiProperty()
-  @IsString()
-  createdBy: string;
 }
