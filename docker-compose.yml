@@ -1,6 +1,39 @@
 version: '3'
 
 services:
+  caddy:
+    image: caddy/caddy:2.2.1-alpine
+    container_name: caddy-service
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - /site:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: api
+    depends_on:
+      - db
+    ports:
+      - 4000:4000
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: client
+    depends_on:
+      - api
+    ports:
+      - 3000:3000
+
   db:
     image: postgres:14-alpine
     container_name: db
@@ -11,3 +44,7 @@ services:
       POSTGRES_USER: devalade
       POSTGRES_PASSWORD: XmD@QCJCNaJ4Rv
       POSTGRES_DB: ilewemi
+
+volumes:
+  caddy_data:
+  caddy_config:

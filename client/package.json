@@ -9,12 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@mantine/core": "^4.2.6",
-    "@mantine/hooks": "^4.2.6",
-    "@mantine/next": "^4.2.6",
+    "@mantine/core": "^4.2.7",
+    "@mantine/dates": "^4.2.7",
+    "@mantine/form": "^4.2.7",
+    "@mantine/hooks": "^4.2.7",
+    "@mantine/modals": "^4.2.7",
+    "@mantine/next": "^4.2.7",
+    "@mantine/notifications": "^4.2.7",
+    "@mantine/rte": "^4.2.7",
+    "axios": "^0.27.2",
+    "babel-plugin-superjson-next": "^0.4.3",
+    "cookies-next": "^2.0.4",
+    "dayjs": "^1.11.2",
     "next": "12.1.6",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "react-query": "^3.39.1",
+    "tabler-icons-react": "^1.48.1",
+    "zod": "^3.17.3"
   },
   "devDependencies": {
     "@types/node": "17.0.35",
