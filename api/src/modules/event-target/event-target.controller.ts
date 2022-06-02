@@ -1,15 +1,22 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { EventTargetService } from './event-target.service';
-import { CreateEventTargetDto } from './dto/create-event-target.dto';
-import { UpdateEventTargetDto } from './dto/update-event-target.dto';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
+import { CreateEventTargetDto, UpdateEventTargetDto } from './dto';
 
 @Controller('event-target')
 export class EventTargetController {
   constructor(private readonly eventTargetService: EventTargetService) {}
 
   @Post()
-  create(@Body() createEventTargetDto: CreateEventTargetDto) {
-    return this.eventTargetService.create(createEventTargetDto);
+  create(@Body() data: CreateEventTargetDto) {
+    return this.eventTargetService.create(data);
   }
 
   @Get()
@@ -19,16 +26,16 @@ export class EventTargetController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.eventTargetService.findOne(+id);
+    return this.eventTargetService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEventTargetDto: UpdateEventTargetDto) {
-    return this.eventTargetService.update(+id, updateEventTargetDto);
+  update(@Param('id') id: string, @Body() data: UpdateEventTargetDto) {
+    return this.eventTargetService.update(id, data);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.eventTargetService.remove(+id);
+    return this.eventTargetService.remove(id);
   }
 }
