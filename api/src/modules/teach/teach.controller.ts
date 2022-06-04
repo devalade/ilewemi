@@ -10,7 +10,9 @@ import {
 } from '@nestjs/common';
 import { CreateTeachDto } from './dto/create-teach.dto';
 import { UpdateTeachDto } from './dto/update-teach.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Teach')
 @Controller('teach')
 export class TeachController {
   constructor(private readonly teachService: TeachService) {}

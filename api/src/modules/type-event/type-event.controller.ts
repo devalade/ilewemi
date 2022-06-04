@@ -9,7 +9,9 @@ import {
   Delete,
 } from '@nestjs/common';
 import { CreateTypeEventDto, UpdateTypeEventDto } from './dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('TypeEvent')
 @Controller('type-event')
 export class TypeEventController {
   constructor(private readonly typeEventService: TypeEventService) {}

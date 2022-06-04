@@ -10,7 +10,9 @@ import {
 } from '@nestjs/common';
 import { CreateSchoolEventDto } from './dto/create-school-event.dto';
 import { UpdateSchoolEventDto } from './dto/update-school-event.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('SchoolEvent')
 @Controller('school-event')
 export class SchoolEventController {
   constructor(private readonly schoolEventService: SchoolEventService) {}

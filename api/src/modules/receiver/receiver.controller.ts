@@ -10,7 +10,9 @@ import {
 } from '@nestjs/common';
 import { CreateReceiverDto } from './dto/create-receiver.dto';
 import { UpdateReceiverDto } from './dto/update-receiver.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Receiver')
 @Controller('receiver')
 export class ReceiverController {
   constructor(private readonly receiverService: ReceiverService) {}
@@ -32,7 +34,7 @@ export class ReceiverController {
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() data: UpdateReceiverDto) {
-    return this.receiverService.update(id, updateReceiverDto);
+    return this.receiverService.update(id, data);
   }
 
   @Delete(':id')

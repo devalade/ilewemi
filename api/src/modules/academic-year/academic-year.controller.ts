@@ -9,7 +9,9 @@ import {
   Delete,
 } from '@nestjs/common';
 import { CreateAcademicYearDto, UpdateAcademicYearDto } from './dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('AcademicYear')
 @Controller('academic-year')
 export class AcademicYearController {
   constructor(private readonly academicYearService: AcademicYearService) {}

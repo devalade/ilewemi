@@ -18,7 +18,6 @@ import { MessageModule } from './message/message.module';
 import { ScheduleEventModule } from './schedule-event/schedule-event.module';
 import { AttendModule } from './attend/attend.module';
 import { ReceiverModule } from './receiver/receiver.module';
-import { EvenementModule } from './evenement/evenement.module';
 import { SchoolEventModule } from './school-event/school-event.module';
 import { TypeEventModule } from './type-event/type-event.module';
 import { EventTargetModule } from './event-target/event-target.module';
@@ -58,7 +57,6 @@ import { EventTargetModule } from './event-target/event-target.module';
     ScheduleEventModule,
     AttendModule,
     ReceiverModule,
-    EvenementModule,
     SchoolEventModule,
     TypeEventModule,
     EventTargetModule,

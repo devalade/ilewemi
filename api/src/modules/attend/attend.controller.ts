@@ -9,7 +9,9 @@ import {
   Delete,
 } from '@nestjs/common';
 import { CreateAttendDto, UpdateAttendDto } from './dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Attend')
 @Controller('attend')
 export class AttendController {
   constructor(private readonly attendService: AttendService) {}

@@ -11,7 +11,9 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { CreateMessageDto, UpdateMessageDto } from './dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Message')
 @Controller('message')
 export class MessageController {
   constructor(private readonly messageService: MessageService) {}

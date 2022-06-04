@@ -1655,6 +1655,11 @@ isexe@^2.0.0:
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=
 
+jotai@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.7.1.tgz#a8ed7e05dc4ea0d6692f1301126340a24ee1350c"
+  integrity sha512-Ucighxm0GwjvMpnLn7//CrHFSgLoL7LxHhXm7ofUNIktsRE4TAAhzrwsBb0LjJ0DuBJqQEJq9/jbHFfjO0ylYQ==
+
 js-sha3@0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/js-sha3/-/js-sha3-0.8.0.tgz#b9b7a5da73afad7dedd0f8c463954cbde6818840"
@@ -1696,6 +1701,11 @@ json5@^1.0.1:
   dependencies:
     array-includes "^3.1.4"
     object.assign "^4.1.2"
+
+jwt-decode@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
+  integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
 
 language-subtag-registry@~0.3.2:
   version "0.3.21"

@@ -12,7 +12,9 @@ import {
 } from '@nestjs/common';
 import { CreateScheduleEventDto } from './dto/create-schedule-event.dto';
 import { UpdateScheduleEventDto } from './dto/update-schedule-event.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('ScheduleEvent')
 @Controller('schedule-event')
 export class ScheduleEventController {
   constructor(private readonly scheduleEventService: ScheduleEventService) {}

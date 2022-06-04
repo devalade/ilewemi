@@ -1,6 +1,7 @@
 import { Entity, Column, BeforeInsert } from 'typeorm';
 import * as argon2 from 'argon2';
 import { Model } from '@Modules/common/model.entity';
+import { ApiTags } from '@nestjs/swagger';
 
 export enum UserRole {
   PRINCIPAL = 'principal',
@@ -10,6 +11,7 @@ export enum UserRole {
 }
 
 @Entity('user')
+@ApiTags()
 export class UserEntity extends Model {
   @Column({ name: 'first_name' })
   firstName: string;
@@ -20,7 +22,7 @@ export class UserEntity extends Model {
   @Column({ unique: true })
   email: string;
 
-  @Column({ unique: true, name: 'phone_number' })
+  @Column({ unique: true, name: 'phone_number', nullable: true })
   phoneNumber: string;
 
   @Column({

@@ -11,7 +11,9 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { CreateSchoolFeeDto, UpdateSchoolFeeDto } from './dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('SchoolFees')
 @Controller('school-fees')
 export class SchoolFeesController {
   constructor(private readonly schoolFeesService: SchoolFeesService) {}

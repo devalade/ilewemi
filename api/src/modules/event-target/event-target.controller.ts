@@ -9,7 +9,9 @@ import {
   Delete,
 } from '@nestjs/common';
 import { CreateEventTargetDto, UpdateEventTargetDto } from './dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('EventTarget')
 @Controller('event-target')
 export class EventTargetController {
   constructor(private readonly eventTargetService: EventTargetService) {}

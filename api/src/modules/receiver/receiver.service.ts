@@ -21,7 +21,7 @@ export class ReceiverService {
   async create(data: CreateReceiverDto) {
     const { tutorId, messageId } = data;
     const tutor = await this.tutorRepository.findOneOrFail(tutorId);
-    const message = await this.messageRepository.findOneOrFail();
+    const message = await this.messageRepository.findOneOrFail(messageId);
 
     return await this.receiverRepository.insert({
       tutor,

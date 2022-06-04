@@ -13,8 +13,11 @@ import {
   CreateTutorDto,
   CreateStudentDto,
   UpdateStudentDto,
+  UpdateMarkDto,
 } from './dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Student')
 @Controller('student')
 export class StudentController {
   constructor(private readonly studentService: StudentService) {}
@@ -39,7 +42,7 @@ export class StudentController {
     @Param('student_id') student_id: string,
     @Param('mark_id') mark_id: string,
 
-    @Body() data: UpdateStudentDto,
+    @Body() data: UpdateMarkDto,
   ) {
     return this.studentService.updateMark(student_id, mark_id, data);
   }

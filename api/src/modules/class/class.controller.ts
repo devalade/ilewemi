@@ -11,7 +11,9 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { CreateClassDto, UpdateClassDto } from './dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Class')
 @Controller('class')
 export class ClassController {
   constructor(private readonly classService: ClassService) {}
