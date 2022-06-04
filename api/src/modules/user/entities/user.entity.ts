@@ -11,7 +11,6 @@ export enum UserRole {
 }
 
 @Entity('user')
-@ApiTags()
 export class UserEntity extends Model {
   @Column({ name: 'first_name' })
   firstName: string;
