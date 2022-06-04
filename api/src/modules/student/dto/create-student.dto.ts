@@ -13,8 +13,4 @@ export class CreateStudentDto {
   @ApiProperty()
   @IsString()
   lastName: string;
-
-  @ApiProperty()
-  @IsString()
-  createdBy: string;
 }

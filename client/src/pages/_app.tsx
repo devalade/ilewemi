@@ -7,9 +7,15 @@ import {
   MantineProvider,
   ColorScheme,
   ColorSchemeProvider,
+  Global,
 } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
+import '../../styles/globals.css';
+
+export function reportWebVitals(metric) {
+  console.log(metric);
+}
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -42,13 +48,29 @@ export default function App(props: AppPropsWithLayout) {
   return (
     <>
       <Head>
-        <title>Mantine next example</title>
+        <title>Ilewemi</title>
         <meta
           name='viewport'
           content='minimum-scale=1, initial-scale=1, width=device-width'
         />
-        <link rel='shortcut icon' href='/favicon.svg' />
       </Head>
+      <Global
+        styles={(theme) => ({
+          '*, *::before, *::after': {
+            boxSizing: 'border-box',
+            fontFamily: 'Poppins',
+          },
+
+          body: {
+            ...theme.fn.fontStyles(),
+            backgroundColor:
+              theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+            color:
+              theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
+            lineHeight: theme.lineHeight,
+          },
+        })}
+      />
       <QueryClientProvider client={queryClient}>
         <ColorSchemeProvider
           colorScheme={colorScheme}

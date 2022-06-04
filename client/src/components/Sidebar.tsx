@@ -10,6 +10,10 @@ import {
   Receipt2,
   SwitchHorizontal,
   Logout,
+  Users,
+  School,
+  Cash,
+  CalendarEvent,
 } from 'tabler-icons-react';
 
 const useStyles = createStyles((theme, _params, getRef) => {
@@ -72,13 +76,10 @@ const useStyles = createStyles((theme, _params, getRef) => {
 });
 
 const data = [
-  { link: '', label: 'Gestion des admin', icon: Fingerprint },
-  { link: '', label: 'Gestions des élèves', icon: BellRinging },
-  { link: '', label: 'Scolarité', icon: Receipt2 },
-  { link: '', label: 'SSH Keys', icon: Key },
-  { link: '', label: 'Databases', icon: DatabaseImport },
-  { link: '', label: 'Authentication', icon: TwoFA },
-  { link: '', label: 'Other Settings', icon: Settings },
+  { link: '', label: 'Gestion des admin', icon: Users },
+  { link: '', label: 'Gestions des élèves', icon: School },
+  { link: '', label: 'Scolarité', icon: Cash },
+  { link: '', label: 'Évnènement', icon: CalendarEvent },
 ];
 
 function SideBar() {
@@ -109,7 +110,9 @@ function SideBar() {
       className={classes.navbar}>
       <Navbar.Section grow>
         <Group className={classes.header} position='apart'>
-          <Text>Ilewemi</Text>
+          <Text color='#fff' sx={{ fontWeight: 'bold', fontSize: 32 }}>
+            Ilewemi
+          </Text>
         </Group>
         {links}
       </Navbar.Section>

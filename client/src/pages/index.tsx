@@ -7,7 +7,7 @@ function Demo() {
   return (
     <>
       <Button variant='gradient' gradient={{ from: 'indigo', to: 'cyan' }}>
-        Indigo cyan
+        Indigo ddfdsfsdfsdcyan
       </Button>
       <Button
         variant='gradient'

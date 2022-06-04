@@ -1,5 +1,5 @@
 import { Model } from '@src/modules/common/model.entity';
-import { DocumentEntity } from '@src/modules/document/entities/document.entity';
+import { MessageEntity } from '@src/modules/message/entities/message.entity';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 export enum OPERATION_STATUS {
@@ -20,7 +20,7 @@ export class ScheduleEventEntity extends Model {
   @Column({ name: 'publishing_date', type: 'timestamp' })
   publishingDate: Date;
 
-  @ManyToOne(() => DocumentEntity)
+  @ManyToOne(() => MessageEntity)
   @JoinColumn({ name: 'docuement_id' })
-  document: DocumentEntity;
+  message: MessageEntity;
 }

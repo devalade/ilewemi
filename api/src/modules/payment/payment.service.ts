@@ -17,7 +17,7 @@ export class PaymentService {
     private schoolFeeeRepository: Repository<SchoolFeeEntity>,
   ) {}
   async create(data: CreatePaymentDto) {
-    const { amount, studentId, schoolFeeId } = data;
+    const { amount, studentId, schoolFeeId, paymentMethod } = data;
     const student = await this.studentRepository.findOneOrFail(studentId);
     const schoolFee = await this.schoolFeeeRepository.findOneOrFail(
       schoolFeeId,
@@ -25,8 +25,8 @@ export class PaymentService {
 
     const res = await this.paymentRepository.insert({
       student,
-      schoolFee,
       amount,
+      paymentMethod,
     });
     return res;
   }

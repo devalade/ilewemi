@@ -9,7 +9,9 @@ import {
   Delete,
 } from '@nestjs/common';
 import { CreateAbsenceDto, UpdateAbsenceDto } from './dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Absence')
 @Controller('absence')
 export class AbsenceController {
   constructor(private readonly absenceService: AbsenceService) {}

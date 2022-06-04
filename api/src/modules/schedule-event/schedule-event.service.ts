@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { DocumentEntity } from '../document/entities/document.entity';
+import { MessageEntity } from '../message/entities/message.entity';
 import { CreateScheduleEventDto } from './dto/create-schedule-event.dto';
 import { UpdateScheduleEventDto } from './dto/update-schedule-event.dto';
 import { ScheduleEventEntity } from './entities/schedule-event.entity';
@@ -11,16 +11,16 @@ export class ScheduleEventService {
   constructor(
     @InjectRepository(ScheduleEventEntity)
     private scheduleEventRepository: Repository<ScheduleEventEntity>,
-    @InjectRepository(DocumentEntity)
+    @InjectRepository(MessageEntity)
     private docuementRepository: Repository<ScheduleEventEntity>,
   ) {}
 
   async create(data: CreateScheduleEventDto) {
     try {
-      const { operationStatus, publishingDate, documentId } = data;
-      const document = await this.docuementRepository.findOneOrFail(documentId);
+      const { operationStatus, publishingDate, messageId } = data;
+      const message = await this.docuementRepository.findOneOrFail(messageId);
       return await this.scheduleEventRepository.insert({
-        document,
+        message,
         publishingDate,
         operationStatus,
       });

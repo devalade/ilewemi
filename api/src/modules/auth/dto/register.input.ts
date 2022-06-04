@@ -15,7 +15,7 @@ export class RegisterDto {
   })
   @IsEmail()
   @IsNotEmpty()
-  @Unique([UserEntity])
+  // @Unique([UserEntity])
   email: string;
 
   @ApiProperty({

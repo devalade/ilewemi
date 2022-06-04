@@ -14,8 +14,13 @@ import { StudentModule } from './student/student.module';
 import { AbsenceModule } from './absence/absence.module';
 import { SchoolFeesModule } from './school-fees/school-fees.module';
 import { PaymentModule } from './payment/payment.module';
-import { DocumentModule } from './document/document.module';
+import { MessageModule } from './message/message.module';
 import { ScheduleEventModule } from './schedule-event/schedule-event.module';
+import { AttendModule } from './attend/attend.module';
+import { ReceiverModule } from './receiver/receiver.module';
+import { SchoolEventModule } from './school-event/school-event.module';
+import { TypeEventModule } from './type-event/type-event.module';
+import { EventTargetModule } from './event-target/event-target.module';
 
 @Module({
   imports: [
@@ -48,8 +53,13 @@ import { ScheduleEventModule } from './schedule-event/schedule-event.module';
     AbsenceModule,
     SchoolFeesModule,
     PaymentModule,
-    DocumentModule,
+    MessageModule,
     ScheduleEventModule,
+    AttendModule,
+    ReceiverModule,
+    SchoolEventModule,
+    TypeEventModule,
+    EventTargetModule,
   ],
   providers: [
     {

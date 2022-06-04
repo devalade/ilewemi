@@ -14,6 +14,6 @@ export const setupSwagger = (app: INestApplication) => {
     .setVersion(SWAGGER_API_CURRENT_VERSION)
     .addBearerAuth()
     .build();
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup(SWAGGER_API_ROOT, app, document);
+  const message = SwaggerModule.createDocument(app, options);
+  SwaggerModule.setup(SWAGGER_API_ROOT, app, message);
 };
