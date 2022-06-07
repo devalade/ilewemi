@@ -39,14 +39,26 @@ function index({ children }: { children: ReactNode }) {
   //     </Center>
   //   );
   // }
-  // console.log(error);
   // if (error && !meData) {
   //   router.push('/login');
   // }
 
   return (
-    <AppShell padding='md' navbar={<SideBar />} header={<LayoutHeader />}>
-      {children}
+    <AppShell
+      fixed={true}
+      padding='md'
+      navbar={<SideBar />}
+      header={<LayoutHeader />}>
+      <Box
+        sx={() => ({
+          height: '100%',
+          // overflowX: 'scroll',
+          // overflowY: 'scroll',
+          'scrollbar-width': 'none',
+          border: '2px solid red',
+        })}>
+        {children}
+      </Box>
     </AppShell>
   );
 }

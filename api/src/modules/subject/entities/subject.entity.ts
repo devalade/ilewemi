@@ -6,8 +6,4 @@ import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 export class SubjectEntity extends Model {
   @Column()
   name: string;
-
-  @ManyToOne(() => UserEntity)
-  @JoinColumn({ name: 'created_by' })
-  createdBy: UserEntity;
 }

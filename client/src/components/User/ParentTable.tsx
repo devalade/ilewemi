@@ -25,7 +25,7 @@ const jobColors = {
   parent: 'pink',
 };
 
-export function UsersTable({ data }: UsersTableProps) {
+function ParentTable({ data }: UsersTableProps) {
   const queryClient = useQueryClient();
   const deleteUserMutation = useMutation((id: string) => deleteUser(id), {
     onSuccess: (data) => {
@@ -48,7 +48,7 @@ export function UsersTable({ data }: UsersTableProps) {
 
       <td>
         <Badge
-          color={jobColors[item?.role.toLowerCase()]}
+          color={jobColors[item.role.toLowerCase()]}
           variant={theme.colorScheme === 'dark' ? 'light' : 'outline'}>
           {item.role}
         </Badge>
@@ -71,11 +71,11 @@ export function UsersTable({ data }: UsersTableProps) {
           <ActionIcon>
             <Pencil size={16} />
           </ActionIcon>
-          <ActionIcon
+          {/* <ActionIcon
             onClick={() => deleteUserMutation.mutate(item.id)}
             color='red'>
             <Trash size={16} />
-          </ActionIcon>
+          </ActionIcon> */}
         </Group>
       </td>
     </tr>
@@ -87,7 +87,7 @@ export function UsersTable({ data }: UsersTableProps) {
         <thead>
           <tr>
             <th>Nom et Prénom</th>
-            <th>Role</th>
+            <th>Nombre d'enfant</th>
             <th>Email</th>
             <th>Téléphone</th>
             <th />
@@ -98,3 +98,5 @@ export function UsersTable({ data }: UsersTableProps) {
     </ScrollArea>
   );
 }
+
+export default ParentTable;

@@ -8,7 +8,11 @@ import ProfileCard from './ProfileCard';
 const useStyles = createStyles((theme, _params) => {
   return {
     header: {
+      width: '100%',
       backgroundColor: theme.colors.blue[7],
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
     },
     logo: {
       color: theme.colors.blue[1],
@@ -22,11 +26,13 @@ const useStyles = createStyles((theme, _params) => {
 function LayoutHeader() {
   const { classes, cx } = useStyles();
   return (
-    <Header className={classes.header} height={60} p='xs'>
+    <Header className={classes.header} height={70} px='lg'>
       <Box
         sx={() => ({
+          width: '100%',
           display: 'flex',
           justifyContent: 'space-between',
+          flex: 1,
           alignItems: 'center',
         })}>
         {/* <Box sx={() => ({ flex: '1' })}> */}
