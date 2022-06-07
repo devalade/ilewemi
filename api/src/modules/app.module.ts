@@ -29,7 +29,7 @@ import { MailModule } from './mail/mail.module';
     EventEmitterModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: '.env',
+      envFilePath: '.env.local',
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
