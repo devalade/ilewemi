@@ -17,23 +17,29 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 import { z } from 'zod';
-import { loginUser } from '../lib/handle-api';
+import { loginUser } from '../lib/handle-api/auth';
 import { setAccessToken, setRefreshToken } from '../lib/tokens';
+import { useMediaQuery } from '@mantine/hooks';
+import { LoginResponse } from '@src/lib/types/authType';
+import { useAtom } from 'jotai';
+import { userAtom } from '@src/lib/store';
+import { UserType } from '@src/lib/types/userType';
 
-const registerSchema = z.object({
+const loginSchema = z.object({
   email: z.string().email({ message: 'Email incorrect' }),
-  password: z
-    .string({
-      required_error: 'you must provide a password',
-    })
-    .nonempty({ message: 'you must provide a password' }),
+  password: z.string({
+    required_error: 'you must provide a password',
+  }),
 });
 
 function Login() {
   const router = useRouter();
+  const [, setUserAtom] = useAtom(userAtom);
+
+  const largeScreen = useMediaQuery('(min-width: 1200px)', false);
 
   const form = useForm({
-    schema: zodResolver(registerSchema),
+    schema: zodResolver(loginSchema),
     initialValues: {
       email: '',
       password: '',
@@ -41,13 +47,15 @@ function Login() {
   });
 
   const mutation = useMutation<
-    string,
+    LoginResponse,
     AxiosError,
     Parameters<typeof loginUser>['0']
   >('login', loginUser, {
-    onSuccess: (data: any) => {
-      setAccessToken(data.access_token);
-      setRefreshToken(data.refresh_token);
+    onSuccess: (data: LoginResponse) => {
+      setAccessToken(data.tokens.access_token);
+      setRefreshToken(data.tokens.refresh_token);
+      // setUser(data.user.id);
+      setUserAtom(data.user);
       router.push('/');
     },
     onError: (error: any) => {
@@ -78,21 +86,24 @@ function Login() {
       <Paper
         shadow='xl'
         radius='md'
-        sx={{ width: 350, padding: '2.5em' }}
+        sx={() => ({
+          width: largeScreen ? 500 : 350,
+          padding: largeScreen ? '5em 3.5em' : '3.5em 2.5em',
+        })}
         mx='auto'>
         <Text align='center' color='dark' weight='bold' pb='xs' size='lg'>
-          Login
+          Connexion
         </Text>
         <form onSubmit={form.onSubmit(handleSubmit)}>
           <Stack spacing='xs'>
             <TextInput label='Email' {...form.getInputProps('email')} />
             <PasswordInput
-              label='Password'
+              label='Mot de passe'
               {...form.getInputProps('password')}
             />
 
             <Button fullWidth type='submit'>
-              Submit
+              Connectez-vous
             </Button>
           </Stack>
         </form>
