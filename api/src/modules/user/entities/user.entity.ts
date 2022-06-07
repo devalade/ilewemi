@@ -1,12 +1,11 @@
 import { Entity, Column, BeforeInsert } from 'typeorm';
 import * as argon2 from 'argon2';
 import { Model } from '@Modules/common/model.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { Exclude } from 'class-transformer';
 
 export enum UserRole {
-  PRINCIPAL = 'principal',
-  SECRETARY = 'secretary',
-  PREFECT = 'prefect',
+  ADMIN = 'admin',
+  MANAGER = 'manager',
   PARENT = 'parent',
 }
 
@@ -33,14 +32,18 @@ export class UserEntity extends Model {
 
   @BeforeInsert()
   async hashPassword() {
-    this.password = await argon2.hash(this.password);
+    if (this.password) {
+      this.password = await argon2.hash(this.password);
+    }
   }
-  @Column()
+  @Column({ nullable: true })
+  @Exclude({ toPlainOnly: true })
   password: string;
 
   @Column({ default: true, name: 'is_active' })
   isActive: boolean;
 
+  @Exclude({ toPlainOnly: true })
   @Column({ unique: true, nullable: true, name: 'refresh_token_hash' })
   refreshTokenHash: string;
 
@@ -48,7 +51,7 @@ export class UserEntity extends Model {
     return await argon2.verify(this.password, incomePassowrd);
   }
 
-  async compareRefreshTokenshash(incomePassowrd: string) {
-    return await argon2.verify(this.refreshTokenHash, incomePassowrd);
+  async compareRefreshTokenshash(incomeRefreshToken: string) {
+    return await argon2.verify(this.refreshTokenHash, incomeRefreshToken);
   }
 }

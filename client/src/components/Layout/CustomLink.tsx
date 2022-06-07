@@ -1,12 +1,14 @@
 import { createStyles } from '@mantine/core';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 import { Icon } from 'tabler-icons-react';
 
 interface ICustomLink {
+  href: string;
   link: string;
   label: string;
   icon: Icon;
+  useActive: any;
 }
 
 const useStyles = createStyles((theme, _params, getRef) => {
@@ -25,6 +27,7 @@ const useStyles = createStyles((theme, _params, getRef) => {
       padding: `${theme.spacing.xs}px ${theme.spacing.sm}px`,
       borderRadius: theme.radius.sm,
       fontWeight: 500,
+      cursor: 'pointer',
 
       '&:hover': {
         backgroundColor:
@@ -69,20 +72,19 @@ const useStyles = createStyles((theme, _params, getRef) => {
   };
 });
 
-function CustomLink(props: ICustomLink) {
-  const { link, label, icon: LinkIcon } = props;
+const CustomLink = (props: ICustomLink, ref) => {
+  const { href, link, label, icon: LinkIcon, useActive } = props;
   const { classes, cx } = useStyles();
-  const [active, setActive] = useState('');
+  const [active, setActive] = useActive();
 
   return (
-    <Link href={link} passHref>
+    <Link href={href}>
       <a
         className={cx(classes.link, {
           [classes.linkActive]: link === active,
         })}
         key={label}
         onClick={(event) => {
-          event.preventDefault();
           setActive(link);
         }}>
         <LinkIcon className={classes.linkIcon} />
@@ -90,6 +92,6 @@ function CustomLink(props: ICustomLink) {
       </a>
     </Link>
   );
-}
+};
 
 export default CustomLink;

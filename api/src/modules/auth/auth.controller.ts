@@ -1,10 +1,14 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
+  Query,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { RegisterDto, LoginDto } from './dto';
@@ -15,6 +19,8 @@ import {
   RefreshTokenGuard,
 } from '@Modules/common/decorators/guards';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { SetPassordDto } from './dto/set-password.input';
+import { UserEntity } from '../user/entities/user.entity';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -26,6 +32,7 @@ export class AuthController {
   @ApiResponse({ status: 401, description: 'Unauthorized' })
   @Public()
   @Post('local/register')
+  @UseInterceptors(ClassSerializerInterceptor)
   @HttpCode(HttpStatus.CREATED)
   register(@Body() data: RegisterDto): Promise<Tokens> {
     return this.authService.registerLocal(data);
@@ -33,17 +40,35 @@ export class AuthController {
 
   @Public()
   @Post('local/login')
+  @UseInterceptors(ClassSerializerInterceptor)
   @HttpCode(HttpStatus.OK)
-  async login(@Body() data: LoginDto): Promise<Tokens> {
+  async login(
+    @Body() data: LoginDto,
+  ): Promise<{ user: UserEntity; tokens: Tokens }> {
     return this.authService.loginLocal(data);
   }
 
   @UseGuards(AccessTokenGuard)
   @Post('logout')
+  @UseInterceptors(ClassSerializerInterceptor)
   @HttpCode(HttpStatus.OK)
   logout(@GetCurrentUser('sub') userId: string) {
-    console.log(userId);
     return this.authService.logout(userId);
+  }
+
+  @Public()
+  @Post('/set-password')
+  @UseInterceptors(ClassSerializerInterceptor)
+  @HttpCode(HttpStatus.OK)
+  setPassword(@Body() data: SetPassordDto, @Query('token') token: string) {
+    return this.authService.setPassword(data, token);
+  }
+
+  @Public()
+  @Get('/verify-email-token')
+  @HttpCode(HttpStatus.OK)
+  verifyEmailToken(@Query('token') token: string) {
+    return this.authService.verifyEmailToken(token);
   }
 
   @Public()

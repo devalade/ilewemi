@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { createStyles, Navbar } from '@mantine/core';
 import CustomLink from './CustomLink';
 import { LINKS } from '@src/lib/constant';
+import Link from 'next/link';
 
 const useStyles = createStyles((theme, _params, getRef) => {
   const icon = getRef('icon');
@@ -47,19 +48,14 @@ function SideBar() {
     <Navbar height={700} width={{ sm: 300 }} p='md'>
       <Navbar.Section grow>
         {LINKS.map((value, idx) => (
-          <CustomLink key={idx} {...value} />
+          <CustomLink
+            key={value.link}
+            href={value.link}
+            {...value}
+            useActive={() => [active, setActive]}
+          />
         ))}
       </Navbar.Section>
-
-      {/* <Navbar.Section className={classes.footer}>
-        <a
-          href='#'
-          className={classes.link}
-          onClick={(event) => event.preventDefault()}>
-          <Logout className={classes.linkIcon} />
-          <span>Logout</span>
-        </a>
-      </Navbar.Section> */}
     </Navbar>
   );
 }

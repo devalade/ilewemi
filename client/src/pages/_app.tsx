@@ -9,6 +9,7 @@ import {
   ColorSchemeProvider,
   Global,
 } from '@mantine/core';
+import { ModalsProvider } from '@mantine/modals';
 import { NotificationsProvider } from '@mantine/notifications';
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query';
 import '../../styles/globals.css';
@@ -76,12 +77,23 @@ export default function App(props: AppPropsWithLayout) {
           colorScheme={colorScheme}
           toggleColorScheme={toggleColorScheme}>
           <MantineProvider
-            theme={{ colorScheme }}
+            theme={{
+              colorScheme,
+              breakpoints: {
+                xs: 500,
+                sm: 800,
+                md: 1000,
+                lg: 1200,
+                xl: 1400,
+              },
+            }}
             withGlobalStyles
             withNormalizeCSS>
-            <NotificationsProvider position='top-right'>
-              {getLayout(<Component {...pageProps} />)}
-            </NotificationsProvider>
+            <ModalsProvider>
+              <NotificationsProvider position='top-right'>
+                {getLayout(<Component {...pageProps} />)}
+              </NotificationsProvider>
+            </ModalsProvider>
           </MantineProvider>
         </ColorSchemeProvider>
       </QueryClientProvider>

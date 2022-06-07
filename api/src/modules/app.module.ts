@@ -21,9 +21,12 @@ import { ReceiverModule } from './receiver/receiver.module';
 import { SchoolEventModule } from './school-event/school-event.module';
 import { TypeEventModule } from './type-event/type-event.module';
 import { EventTargetModule } from './event-target/event-target.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
+    EventEmitterModule.forRoot(),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
@@ -33,12 +36,12 @@ import { EventTargetModule } from './event-target/event-target.module';
       inject: [ConfigService],
       useFactory: (config: ConfigService) =>
         ({
-          type: config.get('DB_TYPE'),
-          host: config.get('DB_HOST'),
-          port: config.get('DB_PORT'),
-          username: config.get('DB_USERNAME'),
-          password: config.get('DB_PASSWORD'),
-          database: config.get('DB_DATABASE'),
+          type: config.get<string>('DB_TYPE'),
+          host: config.get<string>('DB_HOST'),
+          port: config.get<number>('DB_PORT'),
+          username: config.get<string>('DB_USERNAME'),
+          password: config.get<string>('DB_PASSWORD'),
+          database: config.get<string>('DB_DATABASE'),
           entities: [__dirname + './../**/**.entity{.ts,.js}'],
           synchronize: config.get('DB_SYNC') === 'true',
         } as TypeOrmModuleAsyncOptions),
@@ -60,6 +63,7 @@ import { EventTargetModule } from './event-target/event-target.module';
     SchoolEventModule,
     TypeEventModule,
     EventTargetModule,
+    MailModule,
   ],
   providers: [
     {

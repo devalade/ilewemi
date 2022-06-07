@@ -1,30 +1,17 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   createStyles,
-  Container,
   Avatar,
   UnstyledButton,
   Group,
   Text,
   Menu,
-  Divider,
-  Tabs,
-  Burger,
 } from '@mantine/core';
-import { useBooleanToggle } from '@mantine/hooks';
-import {
-  Logout,
-  Heart,
-  Star,
-  Message,
-  Settings,
-  PlayerPause,
-  Trash,
-  SwitchHorizontal,
-  ChevronDown,
-} from 'tabler-icons-react';
-import { useAtom, useAtomValue } from 'jotai';
+import { Logout, Settings, ChevronDown } from 'tabler-icons-react';
+import { useAtom } from 'jotai';
 import { userAtom } from '@src/lib/store';
+import { setAccessToken } from '@src/lib/tokens';
+import { useRouter } from 'next/router';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -98,10 +85,18 @@ const useStyles = createStyles((theme) => ({
 
 function ProfileCard() {
   const { classes, theme, cx } = useStyles();
+  const router = useRouter();
   // store
-  const user = useAtomValue(userAtom);
+  const [user, setUserAtom] = useAtom(userAtom);
+  console.log(user);
 
   const [userMenuOpened, setUserMenuOpened] = useState(false);
+
+  const handleLogout = useCallback(() => {
+    setUserAtom(null);
+    setAccessToken('');
+    router.push('/login');
+  }, []);
   return (
     <Menu
       size={260}
@@ -116,19 +111,25 @@ function ProfileCard() {
             [classes.userActive]: userMenuOpened,
           })}>
           <Group spacing={7}>
-            <Avatar alt={user.name} radius='xl' size={20} />
+            <Avatar
+              alt={user?.lastName + ' ' + user?.firstName}
+              radius='xl'
+              size={20}
+            />
             <Text
               weight={500}
               size='sm'
               sx={{ lineHeight: 1, color: theme.white }}
               mr={3}>
-              {user.name}
+              {user?.lastName + ' ' + user?.firstName}
             </Text>
             <ChevronDown size={12} />
           </Group>
         </UnstyledButton>
       }>
-      <Menu.Item icon={<Settings size={14} />}>Paramètre</Menu.Item>
+      <Menu.Item onClick={handleLogout} icon={<Settings size={14} />}>
+        Paramètre
+      </Menu.Item>
       <Menu.Item icon={<Logout size={14} />}>Déconnexion</Menu.Item>
     </Menu>
   );

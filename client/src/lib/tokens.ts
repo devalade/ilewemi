@@ -15,3 +15,7 @@ export function getAccessToken(): string | null | void {
 export function getRefreshToken(): string | null {
   return localStorage.getItem('refreshToken');
 }
+
+export function setUser(id: string) {
+  localStorage.setItem('user', id);
+}

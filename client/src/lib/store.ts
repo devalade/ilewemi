@@ -1,3 +1,4 @@
-import { atom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
+import { UserType } from './types/userType';
 
-export const userAtom = atom({ name: 'John Doe', image: '' });
+export const userAtom = atomWithStorage<UserType | null>('user', null);
