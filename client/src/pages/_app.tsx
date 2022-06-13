@@ -59,7 +59,6 @@ export default function App(props: AppPropsWithLayout) {
         styles={(theme) => ({
           '*, *::before, *::after': {
             boxSizing: 'border-box',
-            fontFamily: 'Poppins',
           },
 
           body: {
@@ -79,6 +78,7 @@ export default function App(props: AppPropsWithLayout) {
           <MantineProvider
             theme={{
               colorScheme,
+              fontFamily: 'Open Sans',
               breakpoints: {
                 xs: 500,
                 sm: 800,

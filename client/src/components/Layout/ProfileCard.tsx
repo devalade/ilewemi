@@ -88,7 +88,6 @@ function ProfileCard() {
   const router = useRouter();
   // store
   const [user, setUserAtom] = useAtom(userAtom);
-  console.log(user);
 
   const [userMenuOpened, setUserMenuOpened] = useState(false);
 

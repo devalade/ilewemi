@@ -9,17 +9,9 @@ export class CreateMarkDto {
 
   @ApiProperty()
   @IsString()
-  typeOfExam: TypeOfExam;
-
-  @ApiProperty()
-  @IsString()
   studentId: string;
 
   @ApiProperty()
   @IsString()
   teachId: string;
-
-  @ApiProperty()
-  @IsString()
-  createdBy: string;
 }

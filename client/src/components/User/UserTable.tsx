@@ -26,7 +26,6 @@ const jobColors = {
 };
 
 export function UsersTable({ data }: UsersTableProps) {
-  console.log(data);
   const queryClient = useQueryClient();
   const deleteUserMutation = useMutation((id: string) => deleteUser(id), {
     onSuccess: (data) => {
@@ -49,7 +48,7 @@ export function UsersTable({ data }: UsersTableProps) {
 
       <td>
         <Badge
-          color={jobColors[item.role.toLowerCase()]}
+          color={jobColors[item?.role.toLowerCase()]}
           variant={theme.colorScheme === 'dark' ? 'light' : 'outline'}>
           {item.role}
         </Badge>

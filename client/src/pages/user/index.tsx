@@ -9,6 +9,7 @@ import {
   Title,
 } from '@mantine/core';
 import AddUser from '@src/components/User/modal/AddUser';
+import ParentTable from '@src/components/User/ParentTable';
 import { UsersTable } from '@src/components/User/UserTable';
 import { getAllUser } from '@src/lib/handle-api/user';
 import { UserType } from '@src/lib/types/userType';
@@ -25,6 +26,14 @@ function User() {
   } = useQuery<UserType[]>('users', () => getAllUser('admin,manager'), {
     staleTime: 100000,
   });
+
+  const { data: allParentData } = useQuery<UserType[]>(
+    ['users', 'parent'],
+    () => getAllUser('parent'),
+    {
+      staleTime: 5 * 60 * 1000,
+    }
+  );
 
   if (isLoading) {
     return (
@@ -49,10 +58,12 @@ function User() {
                   Ajouter un utilisateur
                 </Button>
               </Box>
-              <UsersTable data={allUserData} />
+              <UsersTable data={allUserData ? allUserData : []} />
             </Stack>
           </Tabs.Tab>
-          <Tabs.Tab label='Parent'>Tableau de tout les parents ici</Tabs.Tab>
+          <Tabs.Tab label='Parent'>
+            <ParentTable data={allParentData ? allParentData : []} />
+          </Tabs.Tab>
         </Tabs>
       </Stack>
     </>

@@ -1,6 +1,8 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Not, Repository, In } from 'typeorm';
+import { SubjectEntity } from '../subject/entities/subject.entity';
+import { TeachEntity } from '../teach/entities/teach.entity';
 import { UserEntity } from '../user/entities/user.entity';
 import { CreateClassDto } from './dto/create-class.dto';
 import { UpdateClassDto } from './dto/update-class.dto';
@@ -11,20 +13,27 @@ export class ClassService {
   constructor(
     @InjectRepository(ClassEntity)
     private classRepository: Repository<ClassEntity>,
+    @InjectRepository(SubjectEntity)
+    private subjectRepository: Repository<SubjectEntity>,
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>,
+    @InjectRepository(TeachEntity)
+    private teachRepository: Repository<TeachEntity>,
   ) {}
 
   async create(data: CreateClassDto) {
-    try {
-      const user = await this.userRepository.findOne(data.createdBy);
-      delete data.createdBy;
-      const _class = this.classRepository.create({ ...data, createdBy: user });
-      await this.classRepository.save(_class);
-      return _class;
-    } catch (error) {
-      throw new ForbiddenException('Access Denied');
-    }
+    const { name, group, subjects } = data;
+    const _class = await this.classRepository.save({ name, group });
+    const res = await this.subjectRepository.find({
+      where: {
+        id: In(subjects),
+      },
+    });
+    const teach = await this.teachRepository.save(
+      res.map((subject) => ({ class: _class, subject })),
+    );
+
+    return _class;
   }
 
   async findAll() {

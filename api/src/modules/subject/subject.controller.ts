@@ -7,9 +7,12 @@ import {
   Patch,
   Param,
   Delete,
+  HttpCode,
+  HttpStatus,
 } from '@nestjs/common';
 import { CreateSubjectDto, UpdateSubjectDto } from './dto';
 import { ApiTags } from '@nestjs/swagger';
+import { CreateManySubjectDto } from './dto/create-many-subject.dto';
 
 @ApiTags('Subject')
 @Controller('subject')
@@ -17,8 +20,15 @@ export class SubjectController {
   constructor(private readonly subjectService: SubjectService) {}
 
   @Post()
-  create(@Body() createSubjectDto: CreateSubjectDto) {
-    return this.subjectService.create(createSubjectDto);
+  @HttpCode(HttpStatus.CREATED)
+  create(@Body() data: CreateSubjectDto) {
+    return this.subjectService.create(data);
+  }
+
+  @Post('many')
+  @HttpCode(HttpStatus.CREATED)
+  createMany(@Body() data: any) {
+    return this.subjectService.createMany(data);
   }
 
   @Get()

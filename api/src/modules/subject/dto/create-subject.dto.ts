@@ -5,8 +5,4 @@ export class CreateSubjectDto {
   @ApiProperty()
   @IsString()
   name: string;
-
-  @ApiProperty()
-  @IsString()
-  createdBy: string;
 }

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class CreateClassDto {
   @ApiProperty()
@@ -10,7 +10,8 @@ export class CreateClassDto {
   @IsString()
   group: string;
 
-  @ApiProperty()
-  @IsString()
-  createdBy: string;
+  @IsString({
+    each: true,
+  })
+  subjects: string[];
 }

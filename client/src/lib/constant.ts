@@ -1,11 +1,24 @@
-import { CalendarEvent, Cash, School, Users } from 'tabler-icons-react';
+import {
+  AdjustmentsAlt,
+  Ballpen,
+  BrandMessenger,
+  CalendarEvent,
+  Cash,
+  Message,
+  School,
+  UserCheck,
+  Users,
+} from 'tabler-icons-react';
 
 export const BASE_URL = 'http://localhost:4000';
 
 export const LINKS = [
-  { link: '/user', label: 'Gestion des utilisateurs', icon: Users },
-  { link: '/student', label: 'Gestions des élèves', icon: School },
+  { link: '/user', label: 'Utilisateurs', icon: Users },
+  { link: '/configuration', label: 'Configuration', icon: AdjustmentsAlt },
+  { link: '/student', label: 'Apprenant', icon: School },
   { link: '/attandees', label: 'Scolarité', icon: Cash },
+  { link: '/message', label: 'Message', icon: Message },
+  { link: '/absent', label: 'Absence', icon: UserCheck },
   { link: '/event', label: 'Évnènement', icon: CalendarEvent },
 ];
 

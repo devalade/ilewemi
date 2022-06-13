@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../user/entities/user.entity';
 import { CreateSubjectDto, UpdateSubjectDto } from './dto';
+import { CreateManySubjectDto } from './dto/create-many-subject.dto';
 import { SubjectEntity } from './entities/subject.entity';
 
 @Injectable()
@@ -16,14 +17,17 @@ export class SubjectService {
 
   async create(data: CreateSubjectDto) {
     try {
-      const { name, createdBy } = data;
-      const user = await this.userRepository.findOne(createdBy);
-      const res = this.subjectRepository.create({ name, createdBy: user });
+      const { name } = data;
+      const res = this.subjectRepository.create({ name });
       await this.subjectRepository.save(res);
       return res;
     } catch (error) {
       throw new ForbiddenException('Access Denied');
     }
+  }
+
+  async createMany(data: any) {
+    return await this.subjectRepository.save(data.subjects);
   }
 
   async findAll() {
@@ -37,17 +41,15 @@ export class SubjectService {
   }
 
   async update(id: string, data: UpdateSubjectDto) {
-    const { name, createdBy } = data;
-    const user = await this.userRepository.findOne(createdBy);
+    const { name } = data;
     const res = await this.subjectRepository.update(id, {
       name,
-      createdBy: user,
     });
     return res;
   }
 
   remove(id: string) {
-    const res = this.subjectRepository.delete(id);
+    const res = this.subjectRepository.softDelete(id);
     return res;
   }
 }

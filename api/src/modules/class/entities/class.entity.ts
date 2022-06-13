@@ -9,8 +9,4 @@ export class ClassEntity extends Model {
 
   @Column()
   group: string;
-
-  @ManyToOne(() => UserEntity)
-  @JoinColumn({ name: 'created_by' })
-  createdBy: UserEntity;
 }

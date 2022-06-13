@@ -45,7 +45,7 @@ function SideBar() {
   const [active, setActive] = useState('Billing');
 
   return (
-    <Navbar height={700} width={{ sm: 300 }} p='md'>
+    <Navbar height={'100%'} width={{ sm: 300 }} p='md'>
       <Navbar.Section grow>
         {LINKS.map((value, idx) => (
           <CustomLink

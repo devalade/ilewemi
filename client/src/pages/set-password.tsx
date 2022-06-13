@@ -43,8 +43,6 @@ function SetPassword() {
     () => verifyEmailToken(token as string)
   );
 
-  console.log(data);
-
   const form = useForm({
     schema: zodResolver(loginSchema),
     initialValues: {

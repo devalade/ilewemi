@@ -35,7 +35,7 @@ export class AuthService {
       if (error instanceof QueryFailedError && error['code'] == 23505) {
         throw new ConflictException('Email already exist');
       }
-      console.log(error);
+      throw new ForbiddenException('Access denied');
     }
 
     const tokens = await this.getTokens(newUser.id, newUser.email);
@@ -66,10 +66,7 @@ export class AuthService {
   }
   async verifyEmailToken(token: string) {
     try {
-      // const tokenIsValid = await this.jwtService.verifyAsync(token);
-      // console.log(tokenIsValid);
-      // if (!tokenIsValid) throw new ForbiddenException('Link has expired');
-
+      // TODO: check if the token is still valid
       const user = await this.userRepository.find({
         where: {
           refreshTokenHash: token,

@@ -7,9 +7,9 @@ import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity('teach')
 export class TeachEntity extends Model {
-  @ManyToOne(() => UserEntity)
-  @JoinColumn({ name: 'user_id' })
-  user: UserEntity;
+  // @ManyToOne(() => UserEntity)
+  // @JoinColumn({ name: 'user_id' })
+  // user: UserEntity;
 
   @ManyToOne(() => ClassEntity)
   @JoinColumn({ name: 'class_id' })
@@ -19,6 +19,6 @@ export class TeachEntity extends Model {
   @JoinColumn({ name: 'subject_id' })
   subject: SubjectEntity;
 
-  @Column('int')
+  @Column({ nullable: true, type: 'int' })
   coef: number;
 }

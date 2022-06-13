@@ -52,7 +52,7 @@ function AddUser(props: IAddUser) {
   });
 
   const mutation = useMutation<
-    string,
+    UserType,
     AxiosError,
     Parameters<typeof addUser>['0']
   >('addUser', addUser, {
@@ -64,7 +64,7 @@ function AddUser(props: IAddUser) {
         loading: true,
       });
     },
-    onSuccess: async (data: any) => {
+    onSuccess: async (data) => {
       updateNotification({
         id: 'addUser',
         icon: <CircleCheck size={14} />,
@@ -72,17 +72,18 @@ function AddUser(props: IAddUser) {
         message: 'Utilisateur ajouté avec success',
         color: 'green',
       });
-      console.log(data);
-      await queryClient.cancelQueries('addUser');
+      await queryClient.cancelQueries('user');
 
       const previousData = queryClient.getQueryData<UserType[]>('users');
 
-      queryClient.setQueryData<UserType[]>('users', [data, ...previousData]);
+      queryClient.setQueryData<UserType[]>('users', [
+        data,
+        ...(previousData as any),
+      ]);
 
       onClose();
     },
     onError: (error: any) => {
-      console.log(error);
       updateNotification({
         id: 'addUser',
         icon: <ExclamationMark width='14' height='14' strokeWidth='2' />,
@@ -95,7 +96,6 @@ function AddUser(props: IAddUser) {
   });
 
   const handleSubmit = useCallback((data: any) => {
-    console.log(data);
     mutation.mutate(data);
   }, []);
 
