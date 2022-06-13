@@ -23,13 +23,12 @@ export class TeachService {
 
   async create(data: CreateTeachDto) {
     try {
-      const { userId, classId, subjectId, coef } = data;
-      const user = await this.userRepository.findOneOrFail(userId);
+      const { classId, subjectId, coef } = data;
       const _class = await this.classRepository.findOne(classId);
       const subject = await this.subjectRepository.findOne(subjectId);
 
       const res = await this.teachRepository.insert({
-        user,
+        // user,
         class: _class,
         subject,
         coef,

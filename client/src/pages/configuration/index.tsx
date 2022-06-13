@@ -8,7 +8,7 @@ import {
   Group,
   Center,
 } from '@mantine/core';
-import { Coin, Calendar, School, Ballpen } from 'tabler-icons-react';
+import { Coin, Calendar, School, Ballpen, Timeline } from 'tabler-icons-react';
 import Layout from '@src/layout';
 import Link from 'next/link';
 
@@ -18,9 +18,15 @@ const mockdata = [
   { title: 'Scolarité', link: '/school-fees', icon: Coin, color: 'red' },
   {
     title: 'Type Évnènement',
-    link: 'event-type',
+    link: '/event-type',
     icon: Calendar,
     color: 'pink',
+  },
+  {
+    title: 'Année Academic',
+    link: '/academic-year',
+    icon: Timeline,
+    color: 'green',
   },
 ];
 
@@ -80,7 +86,7 @@ function Configuration() {
         <Group position='apart'>
           <Text className={classes.title}>Configuration de base</Text>
         </Group>
-        <SimpleGrid cols={2} mt='md'>
+        <SimpleGrid cols={3} mt='md'>
           {items}
         </SimpleGrid>
       </Card>

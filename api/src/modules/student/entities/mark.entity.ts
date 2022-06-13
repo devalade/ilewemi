@@ -14,14 +14,6 @@ export class MarkEntity extends Model {
   @Column({ name: 'obtained_mark' })
   obtainedMark: number;
 
-  @Column({
-    name: 'type_of_exam',
-    type: 'enum',
-    enum: TypeOfExam,
-    default: TypeOfExam.EVALUATION,
-  })
-  typeOfExam: TypeOfExam;
-
   @ManyToOne(() => TeachEntity)
   @JoinColumn({ name: 'teach_id' })
   teach: TeachEntity;
@@ -29,8 +21,4 @@ export class MarkEntity extends Model {
   @ManyToOne(() => StudentEntity)
   @JoinColumn({ name: 'student_id' })
   student: StudentEntity;
-
-  @ManyToOne(() => UserEntity)
-  @JoinColumn({ name: 'Created_by' })
-  createdBy: UserEntity;
 }

@@ -123,7 +123,7 @@ function AddSubjectModal(props: IAddUser) {
     <Modal
       opened={opened}
       onClose={onClose}
-      title='Ajouter un utilisateur'
+      title='Ajouter une matiere'
       overlayBlur={4}>
       <form onSubmit={form.onSubmit(handleSubmit)}>
         <Box sx={{ maxWidth: 500 }} mx='auto'>

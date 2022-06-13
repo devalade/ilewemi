@@ -1,6 +1,6 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { TeachEntity } from '../teach/entities/teach.entity';
 import { UserEntity } from '../user/entities/user.entity';
 import {
@@ -27,14 +27,17 @@ export class StudentService {
     private teachRepository: Repository<TeachEntity>,
   ) {}
   async create(data: CreateStudentDto) {
-    const { studentCode, lastName, firstName } = data;
-    const res = await this.studentrepository.insert({
+    const { studentCode, lastName, firstName, tutors } = data;
+    const student = await this.studentrepository.save({
       studentCode,
       lastName,
       firstName,
     });
 
-    return res;
+    const res = await this.userRepository.save(tutors);
+    await this.tutorRepository.save({ student, user: res });
+
+    return student;
   }
 
   async addParent(data: CreateTutorDto) {
@@ -49,24 +52,20 @@ export class StudentService {
   }
 
   async addMark(data: CreateMarkDto) {
-    const { studentId, teachId, typeOfExam, createdBy, obtainedMark } = data;
+    const { studentId, teachId, obtainedMark } = data;
     const student = await this.studentrepository.findOneOrFail(studentId);
     const teach = await this.studentrepository.findOneOrFail(teachId);
-    const _createdBy = await this.userRepository.findOneOrFail(createdBy);
-    return await this.markRepository.insert({
+    return await this.markRepository.save({
       student,
       teach,
-      createdBy: _createdBy,
       obtainedMark,
-      typeOfExam,
     });
   }
 
   async updateMark(student_id: string, mark_id: string, data: UpdateMarkDto) {
-    const { typeOfExam, obtainedMark } = data;
+    const { obtainedMark } = data;
     return await this.markRepository.update(mark_id, {
       obtainedMark,
-      typeOfExam,
     });
   }
 

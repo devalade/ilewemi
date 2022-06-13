@@ -55,7 +55,6 @@ function index({ children }: { children: ReactNode }) {
           // overflowX: 'scroll',
           // overflowY: 'scroll',
           'scrollbar-width': 'none',
-          border: '2px solid red',
         })}>
         {children}
       </Box>
