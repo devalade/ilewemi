@@ -43,6 +43,7 @@
     "dotenv": "^16.0.1",
     "handlebars": "^4.7.7",
     "nodemailer": "^6.7.5",
+    "nodemon": "^2.0.16",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
     "pg": "^8.7.3",

@@ -9,7 +9,12 @@ export function getAllClass() {
 export function addClass(payload: {
   name: string;
   group: string;
+  fee: number;
   subjects: ClassType[];
 }) {
   return axiosInstance.post('/api/class', payload).then((res) => res.data);
+}
+
+export function deleteClass(id) {
+  return axiosInstance.delete('/api/class/' + id).then((res) => res.data);
 }

@@ -8,6 +8,7 @@ import {
   Select,
   MultiSelect,
   Stack,
+  NumberInput,
 } from '@mantine/core';
 import { z } from 'zod';
 import { useForm, zodResolver } from '@mantine/form';
@@ -54,6 +55,7 @@ function AddClassModal(props: IAddClassModal) {
     initialValues: {
       name: '',
       group: '',
+      fee: 0,
       subjects: [],
     },
   });
@@ -128,16 +130,10 @@ function AddClassModal(props: IAddClassModal) {
               {...form.getInputProps('group')}
             />
           </Group>
-          <Select
-            label='Frais de scolarité'
-            placeholder='Sélectionnez les frais de scolarité'
-            data={[
-              { label: '120.000F CFA', value: '120000' },
-              {
-                label: '145.000F CFA',
-                value: '145.000',
-              },
-            ]}
+          <NumberInput
+            label='Frais de Scolarité'
+            hideControls
+            {...form.getInputProps('fee')}
           />
           <MultiSelect
             label='Matières'

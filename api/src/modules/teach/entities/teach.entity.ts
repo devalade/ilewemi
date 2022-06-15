@@ -11,11 +11,15 @@ export class TeachEntity extends Model {
   // @JoinColumn({ name: 'user_id' })
   // user: UserEntity;
 
-  @ManyToOne(() => ClassEntity)
+  @ManyToOne(() => ClassEntity, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'class_id' })
   class: ClassEntity;
 
-  @ManyToOne(() => SubjectEntity)
+  @ManyToOne(() => SubjectEntity, {
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'subject_id' })
   subject: SubjectEntity;
 

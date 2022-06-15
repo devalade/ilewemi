@@ -7,6 +7,9 @@ export class ClassEntity extends Model {
   @Column()
   name: string;
 
+  @Column('bigint')
+  fee: number;
+
   @Column()
   group: string;
 }

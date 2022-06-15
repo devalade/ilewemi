@@ -30,7 +30,7 @@ function Subject() {
   }
 
   const items = data?.map(({ id, name }) => (
-    <SubjectButton key={id} name={name} />
+    <SubjectButton key={id} id={id} name={name} />
   ));
 
   return (
@@ -63,7 +63,7 @@ function Subject() {
               Ajouter des matières
             </Button>
             {data?.map(({ id, name }) => (
-              <SubjectButton key={id} name={name} />
+              <SubjectButton key={id} id={id} name={name} />
             ))}
           </SimpleGrid>
         )}

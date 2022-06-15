@@ -14,7 +14,7 @@ export class TypeEventService {
 
   async create(data: CreateTypeEventDto) {
     const { label } = data;
-    return await this.typeEventRepository.insert({ label });
+    return await this.typeEventRepository.save({ label });
   }
 
   async findAll() {

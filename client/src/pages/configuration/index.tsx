@@ -85,7 +85,7 @@ function Configuration() {
         <Group position='apart'>
           <Text className={classes.title}>Configuration de base</Text>
         </Group>
-        <SimpleGrid cols={3} mt='md'>
+        <SimpleGrid cols={2} mt='md'>
           {items}
         </SimpleGrid>
       </Card>
