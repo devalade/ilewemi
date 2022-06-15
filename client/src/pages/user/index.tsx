@@ -46,7 +46,8 @@ function User() {
   return (
     <>
       <AddUser opened={opened} onClose={() => setOpened(false)} />
-      <Stack spacing='lg'>
+
+      <Stack spacing='lg' sx={{ maxWidth: 800 }} mx='auto'>
         <Title order={2} sx={{ fontWeight: 'bold' }}>
           Gestion des utilisateurs
         </Title>

@@ -1,8 +1,6 @@
 import {
   TextInput,
   PasswordInput,
-  Checkbox,
-  Group,
   Center,
   Button,
   Paper,
@@ -18,8 +16,7 @@ import { useCallback } from 'react';
 import { useMutation } from 'react-query';
 import { z } from 'zod';
 import { loginUser } from '../lib/handle-api/auth';
-import { setAccessToken, setRefreshToken } from '../lib/tokens';
-import { useMediaQuery } from '@mantine/hooks';
+import { useLocalStorage, useMediaQuery } from '@mantine/hooks';
 import { LoginResponse } from '@src/lib/types/authType';
 import { useAtom } from 'jotai';
 import { userAtom } from '@src/lib/store';
@@ -34,6 +31,15 @@ const loginSchema = z.object({
 
 function Login() {
   const router = useRouter();
+  const [, setValue] = useLocalStorage<UserType>({
+    key: 'user',
+  });
+  const [, setAccessToken] = useLocalStorage<string>({
+    key: 'accessToken',
+  });
+  const [, setRefreshToken] = useLocalStorage<string>({
+    key: 'refreshToken',
+  });
   const [, setUserAtom] = useAtom(userAtom);
 
   const largeScreen = useMediaQuery('(min-width: 1200px)', false);
@@ -54,9 +60,9 @@ function Login() {
     onSuccess: (data: LoginResponse) => {
       setAccessToken(data.tokens.access_token);
       setRefreshToken(data.tokens.refresh_token);
-      // setUser(data.user.id);
+      setValue(data.user);
       setUserAtom(data.user);
-      router.push('/');
+      router.push('/user');
     },
     onError: (error: any) => {
       showNotification({

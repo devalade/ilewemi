@@ -3,7 +3,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserEntity } from '../user/entities/user.entity';
 import { CreateSubjectDto, UpdateSubjectDto } from './dto';
-import { CreateManySubjectDto } from './dto/create-many-subject.dto';
 import { SubjectEntity } from './entities/subject.entity';
 
 @Injectable()
@@ -48,8 +47,7 @@ export class SubjectService {
     return res;
   }
 
-  remove(id: string) {
-    const res = this.subjectRepository.softDelete(id);
-    return res;
+  async remove(id: string) {
+    return await this.subjectRepository.delete(id);
   }
 }

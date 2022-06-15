@@ -10,3 +10,7 @@ export function addManySubject(payload: { subjects: SubjectType[] }) {
     .post('/api/subject/many', payload)
     .then((res) => res.data);
 }
+
+export function deleteOneSubject(id) {
+  return axiosInstance.delete('/api/subject/' + id).then((res) => res.data);
+}

@@ -25,9 +25,9 @@ function Attandees() {
           </tr>
         </thead>
         <tbody>
-          {[1, 2, 3, 4].map(() => (
+          {[1].map(() => (
             <tr>
-              <td>2345</td>
+              <td>DE3R5T</td>
               <td>12.000F CFA</td>
               <td>
                 <Badge color={PAYEMENT_MODE['cash']} variant='light'>

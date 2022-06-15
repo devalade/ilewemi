@@ -1,12 +1,12 @@
 import { ApiProperty, ApiResponse } from '@nestjs/swagger';
-import { IsDate } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class CreateAcademicYearDto {
   @ApiProperty()
-  @IsDate()
-  startDate: Date;
+  @IsString()
+  startDate: any;
 
   @ApiProperty()
-  @IsDate()
-  endDate: Date;
+  @IsString()
+  endDate: any;
 }

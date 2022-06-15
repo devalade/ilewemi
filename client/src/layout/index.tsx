@@ -19,8 +19,18 @@ import { useLocalStorage } from '@mantine/hooks';
 import { useAtom, useAtomValue } from 'jotai';
 import { userAtom } from '@src/lib/store';
 import { useRouter } from 'next/router';
+import { UserType } from '@src/lib/types/userType';
 
 function index({ children }: { children: ReactNode }) {
+  const [value, setValue] = useLocalStorage<UserType>({
+    key: 'user',
+  });
+  const [, setUserAtom] = useAtom(userAtom);
+
+  useEffect(() => {
+    setUserAtom(value);
+  }, []);
+
   // const router = useRouter();
   // const [user] = useAtom(userAtom);
 
@@ -52,9 +62,6 @@ function index({ children }: { children: ReactNode }) {
       <Box
         sx={() => ({
           height: '100%',
-          // overflowX: 'scroll',
-          // overflowY: 'scroll',
-          'scrollbar-width': 'none',
         })}>
         {children}
       </Box>

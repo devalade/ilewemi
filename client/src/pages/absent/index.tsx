@@ -23,7 +23,7 @@ function Absent() {
         <Button variant='outline'>Signaler une absence</Button>
       </Link>
       <SimpleGrid pt='lg' cols={3}>
-        {[1, 3, 4, 5].map((value, idx) => (
+        {[1].map((value, idx) => (
           <AbsentCard
             key={idx}
             firstName={DATA.firstName}

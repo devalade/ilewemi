@@ -1,3 +1,4 @@
+import getParameterByName from '../utils';
 import { axiosInstance } from './axiosInstance';
 
 export function registerUser(payload: {
@@ -21,9 +22,10 @@ export function setPassword(payload: {
   password: string;
   confirmPassword: string;
 }) {
-  // const url = new URL(location.host);
-  // const params = new URLSearchParams(url.);
-  const token = location.search.split('%')[1];
+  const token = getParameterByName('token');
+  // const urlParams = new URLSearchParams(location.search);
+  // const myParam = urlParams.get('token');
+
   return axiosInstance
     .post('/auth/set-password?token=' + token, payload)
     .then((res) => res.data);

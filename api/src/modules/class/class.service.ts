@@ -22,8 +22,8 @@ export class ClassService {
   ) {}
 
   async create(data: CreateClassDto) {
-    const { name, group, subjects } = data;
-    const _class = await this.classRepository.save({ name, group });
+    const { name, group, fee, subjects } = data;
+    const _class = await this.classRepository.save({ name, group, fee });
     const res = await this.subjectRepository.find({
       where: {
         id: In(subjects),
@@ -53,7 +53,6 @@ export class ClassService {
   }
 
   async remove(id: string) {
-    const _class = this.classRepository.delete(id);
-    return _class;
+    return await this.classRepository.delete(id);
   }
 }

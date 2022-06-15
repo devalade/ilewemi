@@ -12,6 +12,7 @@ import { useAtom } from 'jotai';
 import { userAtom } from '@src/lib/store';
 import { setAccessToken } from '@src/lib/tokens';
 import { useRouter } from 'next/router';
+import { useLocalStorage } from '@mantine/hooks';
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -86,14 +87,19 @@ const useStyles = createStyles((theme) => ({
 function ProfileCard() {
   const { classes, theme, cx } = useStyles();
   const router = useRouter();
+  const [value, setValue] = useLocalStorage({ key: 'user' });
+  const [, setAccessToken] = useLocalStorage({ key: 'accessToken' });
+  const [, setRefreshToken] = useLocalStorage({ key: 'refreshToken' });
+
   // store
   const [user, setUserAtom] = useAtom(userAtom);
 
   const [userMenuOpened, setUserMenuOpened] = useState(false);
 
   const handleLogout = useCallback(() => {
-    setUserAtom(null);
+    setValue('');
     setAccessToken('');
+    setRefreshToken('');
     router.push('/login');
   }, []);
   return (
@@ -126,10 +132,10 @@ function ProfileCard() {
           </Group>
         </UnstyledButton>
       }>
-      <Menu.Item onClick={handleLogout} icon={<Settings size={14} />}>
-        Paramètre
+      <Menu.Item icon={<Settings size={14} />}>Paramètre</Menu.Item>
+      <Menu.Item onClick={handleLogout} icon={<Logout size={14} />}>
+        Déconnexion
       </Menu.Item>
-      <Menu.Item icon={<Logout size={14} />}>Déconnexion</Menu.Item>
     </Menu>
   );
 }

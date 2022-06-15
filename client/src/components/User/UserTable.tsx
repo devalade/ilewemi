@@ -37,8 +37,8 @@ export function UsersTable({ data }: UsersTableProps) {
     <tr key={item.id}>
       <td>
         <Group spacing='sm'>
-          <Avatar size={30} radius={30}>
-            {item.firstName + ' ' + item.lastName}{' '}
+          <Avatar size={30} radius={30} color='blue'>
+            {item.firstName[0] + ' ' + item.lastName[0]}{' '}
           </Avatar>
           <Text size='sm' weight={500}>
             {item.firstName + ' ' + item.lastName}
