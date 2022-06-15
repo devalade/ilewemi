@@ -1,5 +1,12 @@
 import Layout from '@src/layout';
-import { Box, Button, Center, createStyles, Text } from '@mantine/core';
+import {
+  Box,
+  Button,
+  Center,
+  createStyles,
+  ScrollArea,
+  Text,
+} from '@mantine/core';
 import { Loader, Plus } from 'tabler-icons-react';
 import Link from 'next/link';
 import { useQuery } from 'react-query';
@@ -20,19 +27,18 @@ const DATA = {
 const useStyles = createStyles((theme) => ({
   wrapper: {
     width: '100%',
+    height: '100%',
     display: 'flex',
     flexDirection: 'row',
-    flex: 1,
   },
   sideBar: {
     minWidth: 300,
     height: '100%',
     margin: '-16px',
+    paddingBottom: '-1rem',
     marginLeft: 0,
 
-    borderLeft: '2px',
-    borderStyle: 'solid',
-    borderColor: theme.colors.gray[4],
+    'border-left': '2px solid ' + theme.colors.gray[5],
   },
 }));
 
@@ -70,9 +76,9 @@ function Student() {
           <StudentTable data={allStudent || []} />
         )}
       </Box>
-      <Box className={classes.sideBar}>
+      <ScrollArea className={classes.sideBar}>
         <StudentInfoAction {...DATA} />
-      </Box>
+      </ScrollArea>
     </Box>
   );
 }

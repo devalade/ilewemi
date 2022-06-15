@@ -13,20 +13,19 @@ import Layout from '@src/layout';
 import Link from 'next/link';
 
 const mockdata = [
-  { title: 'Matières', link: '/subject', icon: Ballpen, color: 'red' },
-  { title: 'Classes', link: '/classes', icon: School, color: 'cyan' },
-  { title: 'Scolarité', link: '/school-fees', icon: Coin, color: 'red' },
-  {
-    title: 'Type Évnènement',
-    link: '/event-type',
-    icon: Calendar,
-    color: 'pink',
-  },
   {
     title: 'Année Academic',
     link: '/academic-year',
     icon: Timeline,
     color: 'green',
+  },
+  { title: 'Matières', link: '/subject', icon: Ballpen, color: 'red' },
+  { title: 'Classes', link: '/classes', icon: School, color: 'cyan' },
+  {
+    title: 'Type Évnènement',
+    link: '/event-type',
+    icon: Calendar,
+    color: 'pink',
   },
 ];
 
@@ -66,8 +65,8 @@ const useStyles = createStyles((theme) => ({
 function Configuration() {
   const { classes, theme } = useStyles();
 
-  const items = mockdata.map((item) => (
-    <Link href={'/configuration' + item.link}>
+  const items = mockdata.map((item, idx) => (
+    <Link key={idx} href={'/configuration' + item.link}>
       <UnstyledButton component='a' key={item.title} className={classes.item}>
         <item.icon color={theme.colors[item.color][6]} size={32} />
         <Text size='xs' mt={7}>

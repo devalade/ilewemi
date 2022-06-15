@@ -72,7 +72,7 @@ export class AuthService {
           refreshTokenHash: token,
         },
       });
-      if (user.length !== 0) return { isValid: false };
+      if (user.length !== 1) return { isValid: false };
 
       return { isValid: true };
     } catch (error) {

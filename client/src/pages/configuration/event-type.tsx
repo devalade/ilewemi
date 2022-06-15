@@ -22,8 +22,8 @@ function EventType() {
           Ajouter un type d'évènement
         </Button>
         <SimpleGrid cols={2} mt={20}>
-          {[1, 2, 3, 4].map(() => (
-            <Paper withBorder>
+          {[1, 2, 3, 4].map((v, idx) => (
+            <Paper key={idx} withBorder>
               <Group position='apart' p={12}>
                 <Text>Fête patronale</Text>
                 <ActionIcon color='red' variant='hover'>

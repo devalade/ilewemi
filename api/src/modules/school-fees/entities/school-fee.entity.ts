@@ -5,7 +5,7 @@ import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 @Entity('school_fees')
 export class SchoolFeeEntity extends Model {
-  @Column('int')
+  @Column('bigint')
   fee: number;
 
   @ManyToOne(() => ClassEntity)

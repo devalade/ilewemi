@@ -13,11 +13,7 @@ export class AcademicYearService {
   ) {}
 
   async create(data: CreateAcademicYearDto) {
-    const res = this.academicYearRepository.create(
-      data as Partial<AcademicYearEntity>,
-    );
-    await this.academicYearRepository.save(res);
-    return res;
+    return await this.academicYearRepository.save(data);
   }
 
   async findAll() {

@@ -32,7 +32,7 @@ function Event() {
         <Button>Ajouer un évenement</Button>
       </Link>
       <Stack mt={22}>
-        {[1, 2, 3, 4].map((v) => (
+        {[1].map((v) => (
           <EventCard />
         ))}
       </Stack>
@@ -45,8 +45,8 @@ function Event() {
       <Paper withBorder p={16}>
         <Stack>
           <Box>
-            <Text className={classes.eventTitle}>Nom de lévenenemt</Text>
-            <Text className={classes.eventDate}>À lieu le:</Text>
+            <Text className={classes.eventTitle}>Fête patronale</Text>
+            <Text className={classes.eventDate}>Dans l'école</Text>
           </Box>
           <Text lineClamp={6}>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores
